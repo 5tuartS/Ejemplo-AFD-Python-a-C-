@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+bool automata_binario(string cadena_entrada) {
+    int transiciones[2][2] = {
+        {1, 1}, // estado 0
+        {1, 1}  // estado 1
+    };
+
+    int estado_actual = 0;
+    int estado_final = 1;
+
+    for (char simbolo : cadena_entrada) {
+        if (simbolo != '0' && simbolo != '1')
+            return false;
+
+        estado_actual = transiciones[estado_actual][simbolo - '0'];
+    }
+
+    return estado_actual == estado_final;
+}
+
+int main() {
+    string cadena_entrada;
+    cout << "Ingrese una cadena binaria: ";
+    cin >> cadena_entrada;
+
+    if (automata_binario(cadena_entrada)) {
+        cout << "La cadena binaria es aceptada por el autómata" << endl;
+    } else {
+        cout << "La cadena es rechazada por el autómata" << endl;
+    }
+
+    return 0;
+}
