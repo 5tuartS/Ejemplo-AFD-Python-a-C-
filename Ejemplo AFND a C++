@@ -1,0 +1,38 @@
+#include <iostream>
+
+using namespace std;
+
+// Función para verificar las transiciones desde un estado dado con un símbolo dado
+bool transiciones(string estado, char simbolo) {
+    if (estado == "q0" && (simbolo == '0' || simbolo == '1')) {
+        return true;
+    } else if (estado == "q1" && simbolo == '1') {
+        return false;
+    }
+    return false; // En caso de que el estado o el símbolo no coincidan
+}
+
+int main() {
+    string estado_actual = "q0";
+    string estado_final = "q1";
+
+    string cadena;
+    cout << "Ingrese la cadena binaria a evaluar: ";
+    cin >> cadena;
+
+    for (char simbolo : cadena) {
+        if (transiciones(estado_actual, simbolo)) {
+            estado_actual = "q0"; // Solo hay un posible estado siguiente para q0
+        } else {
+            estado_actual = ""; // No hay posible estado siguiente para q1, se vacía el estado actual
+        }
+    }
+
+    if (estado_actual == estado_final) {
+        cout << "La cadena es aceptada por el AFND" << endl;
+    } else {
+        cout << "La cadena NO es aceptada por el AFND" << endl;
+    }
+
+    return 0;
+}
